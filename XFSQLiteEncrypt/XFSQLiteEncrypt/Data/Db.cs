@@ -42,12 +42,10 @@ namespace XFSQLiteEncrypt.Data
 
 			_connectionString = baseConnectionString;
 
-
 			using (SqliteConnection connection = CreateConnection())
 			{
 				CreateTableIfNotExists(connection);
 			}
-
 		}
 
 		//Dapper Style
@@ -184,14 +182,11 @@ namespace XFSQLiteEncrypt.Data
 			};
 
 			var backupConnection = new SqliteConnection(conn.ToString());
-			backupConnection.Open();
 
-			var connection = new SqliteConnection(_connectionString);
-			connection.Open();
-			connection.BackupDatabase(backupConnection);
-			connection.Close();
-
-			backupConnection.Close();
+			using (SqliteConnection connection = CreateConnection())
+			{
+				connection.BackupDatabase(backupConnection);
+			}                
 
 			return backupPath;
 		}
