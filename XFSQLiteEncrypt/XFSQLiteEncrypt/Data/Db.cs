@@ -162,7 +162,7 @@ namespace XFSQLiteEncrypt.Data
 			sql = @"CREATE Unique INDEX if not exists [User.idx1] ON User ([UserId])";
 			new SqliteCommand(sql, conn).ExecuteNonQuery();
 
-			sql = @"CREATE INDEX if not exists [User.idx1] ON User ([UserName])";
+			sql = @"CREATE INDEX if not exists [User.idx2] ON User ([UserName])";
 			new SqliteCommand(sql, conn).ExecuteNonQuery();
 
 		}
